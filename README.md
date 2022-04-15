@@ -105,3 +105,11 @@ a
 lamb> letrec length xs = if null xs then 0 else 1 + (length (tail xs)) in length [1,2,3]
 (\f x . (f (f (f x))))
 ```
+
+## Install
+
+`clone` this repo then run `cabal run`.
+
+### Prerequisites
+
+You simply need to install `haskell` and `cabal` via `GHCup`.
