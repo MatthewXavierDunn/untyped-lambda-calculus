@@ -87,7 +87,8 @@ libFns = Map.fromList
    ("null", null),
    ("succ", succ),
    ("pred", pred),
-   ("not", not)]
+   ("not", not),
+   ("fix", fix)]
 
 convert :: InTerm -> Term
 convert (InVar name)
