@@ -37,18 +37,18 @@ There are additional, larger structures in the language that are desugared into 
 The natural numbers use the Church numerals encoding:
 
 ```
-lamb> 0
+lam> 0
 (\f x . x)
-lamb> 1
+lam> 1
 (\f x . (f x))
 ```
 
 And therefore, all operations defined on them are defined in terms of this encoding:
 
 ```
-lamb> 4 + 5
+lam> 4 + 5
 (\f x . (f (f (f (f (f (f (f (f (f x))))))))))
-lamb> succ 2
+lam> succ 2
 (\f x . (f (f (f x))))
 ```
 
@@ -57,14 +57,14 @@ lamb> succ 2
 As with the natural numbers, the language also uses the standard Church encoding:
 
 ```
-lamb> True
+lam> True
 (\x y . x)
-lamb> False
+lam> False
 (\x y . y)
-lamb> True && True
+lam> True && True
 (\x y . x)
-lamb> False || False
-(\x y . x)
+lam> False || False
+(\x y . y)
 ```
 
 #### Lists
@@ -72,11 +72,11 @@ lamb> False || False
 Lists are structured as Church pairs with a single element as the first of the pair, and the rest of the list as the second. Additionally we have a `Nil` element which represents the end of the list.
 
 ```
-lamb> [1,2,3]
+lam> [1,2,3]
 (\f . (f (\f x . (f x)) (\f . (f (\f x . (f (f x))) (\f . (f (\f x . (f (f (f x)))) (\x x y . x)))))))
-lamb> head [1,2,3]
+lam> head [1,2,3]
 (\f x . (f x))
-lamb> tail [1,2,3]
+lam> tail [1,2,3]
 (\f . (f (\f x . (f (f x))) (\f . (f (\f x . (f (f (f x)))) (\x x y . x)))))
 ```
 
@@ -87,14 +87,14 @@ There are several large expressions which make writing programs in this language
 **if-then-else**
 
 ```
-lamb> if True then a else b
+lam> if True then a else b
 a
 ```
 
 **let-in**
 
 ```
-lamb> let f x = x in f a
+lam> let f x = x in f a
 a
 ```
 
@@ -102,7 +102,7 @@ a
 (for allowing recursion in a let expression)
 
 ```
-lamb> letrec length xs = if null xs then 0 else 1 + (length (tail xs)) in length [1,2,3]
+lam> letrec length xs = if null xs then 0 else 1 + (length (tail xs)) in length [1,2,3]
 (\f x . (f (f (f x))))
 ```
 
